@@ -1,5 +1,5 @@
 ---
-title: 'Post: Standard'
+title: Absolutely new post
 excerpt_separator: "<!--more-->"
 categories:
 - Blog
