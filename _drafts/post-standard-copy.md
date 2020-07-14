@@ -1,5 +1,5 @@
 ---
-title: 'Post: Standard-(copy)'
+title: Compressing Redshift columnar data even further with proper encodings
 excerpt_separator: "<!--more-->"
 categories:
 - Blog
@@ -9,24 +9,118 @@ tags:
 - standard
 
 ---
-All children, except one, grow up. They soon know that they will grow up, and the way Wendy knew was this. One day when she was two years old she was playing in a garden, and she plucked another flower and ran with it to her mother. I suppose she must have looked rather delightful, for Mrs. Darling put her hand to her heart and cried, "Oh, why can't you remain like this for ever!" This was all that passed between them on the subject, but henceforth Wendy knew that she must grow up. You always know after you are two. Two is the beginning of the end.
+# Basics
 
-Mrs. Darling first heard of Peter when she was tidying up her children's minds. It is the nightly custom of every good mother after her children are asleep to rummage in their minds and put things straight for next morning, repacking into their proper places the many articles that have wandered during the day.
+Amazon Redshift is database aimed primarily on analytics and OLAP queries.
 
-<!--more-->
+One if its key features is storing data in columnar format, in other words keeping one column's data adjacent on disk.
 
-This post has a manual excerpt `<!--more-->` set after the second paragraph. The following YAML Front Matter has also be applied:
+That enables storing higher volumes of data compared to row formats due to encoding algorithms and one column's homogenous data nature (it compresses very well).
 
-```yaml
-excerpt_separator: "<!--more-->"
+By default when you initially create and populate a table, Redshift chooses compression algorithms for every column by default.
+
+See more about [Redshift compression encodings](https://docs.aws.amazon.com/redshift/latest/dg/c_Compression_encodings.html).
+
+# Question default compression options
+
+I wanted to know if it was possible to apply better encoding algorithms and compress data even further.
+
+Luckily we have [ANALYZE COMPRESSION](https://docs.aws.amazon.com/redshift/latest/dg/r_ANALYZE_COMPRESSION.html) command:
+
+> Performs compression analysis and produces a report with the suggested compression encoding for the tables analyzed. For each column, the report includes an estimate of the potential reduction in disk space compared to the current encoding.
+
+```sql
+ANALYZE COMPRESSION hevo.wheely_prod_orders__backup COMPROWS 1000000 ;
 ```
 
-If you could keep awake (but of course you can't) you would see your own mother doing this, and you would find it very interesting to watch her. It is quite like tidying up drawers. You would see her on her knees, I expect, lingering humorously over some of your contents, wondering where on earth you had picked this thing up, making discoveries sweet and not so sweet, pressing this to her cheek as if it were as nice as a kitten, and hurriedly stowing that out of sight. When you wake in the morning, the naughtiness and evil passions with which you went to bed have been folded up small and placed at the bottom of your mind and on the top, beautifully aired, are spread out your prettier thoughts, ready for you to put on.
+Here is the sample output:
 
-I don't know whether you have ever seen a map of a person's mind. Doctors sometimes draw maps of other parts of you, and your own map can become intensely interesting, but catch them trying to draw a map of a child's mind, which is not only confused, but keeps going round all the time. There are zigzag lines on it, just like your temperature on a card, and these are probably roads in the island, for the Neverland is always more or less an island, with astonishing splashes of colour here and there, and coral reefs and rakish-looking craft in the offing, and savages and lonely lairs, and gnomes who are mostly tailors, and caves through which a river runs, and princes with six elder brothers, and a hut fast going to decay, and one very small old lady with a hooked nose. It would be an easy map if that were all, but there is also first day at school, religion, fathers, the round pond, needle-work, murders, hangings, verbs that take the dative, chocolate pudding day, getting into braces, say ninety-nine, three-pence for pulling out your tooth yourself, and so on, and either these are part of the island or they are another map showing through, and it is all rather confusing, especially as nothing will stand still.
+|Table|Column|Encoding|Est_reduction_pct|
+|-----|------|--------|-----------------|
+|wheely_prod_orders|_id|raw|0.00|
+|wheely_prod_orders|status|zstd|49.93|
+|wheely_prod_orders|new_client|zstd|39.04|
+|wheely_prod_orders|markup|zstd|99.66|
+|wheely_prod_orders|country_code|zstd|60.67|
+|wheely_prod_orders|tips|zstd|83.34|
+|wheely_prod_orders|tags|zstd|35.80|
 
-Of course the Neverlands vary a good deal. John's, for instance, had a lagoon with flamingoes flying over it at which John was shooting, while Michael, who was very small, had a flamingo with lagoons flying over it. John lived in a boat turned upside down on the sands, Michael in a wigwam, Wendy in a house of leaves deftly sewn together. John had no friends, Michael had friends at night, Wendy had a pet wolf forsaken by its parents, but on the whole the Neverlands have a family resemblance, and if they stood still in a row you could say of them that they have each other's nose, and so forth. On these magic shores children at play are for ever beaching their coracles [simple boat]. We too have been there; we can still hear the sound of the surf, though we shall land no more.
+Your next steps would be:
 
-Of all delectable islands the Neverland is the snuggest and most compact, not large and sprawly, you know, with tedious distances between one adventure and another, but nicely crammed. When you play at it by day with the chairs and table-cloth, it is not in the least alarming, but in the two minutes before you go to sleep it becomes very real. That is why there are night-lights.
+1. CREATE a new table with proposed encodings (possibly new dist/sort keys)
+2. INSERT data to a new table (perform a deep copy)
+3. Perform tests and benchmarks
+4. Interchange tables, delete old table
 
-Occasionally in her travels through her children's minds Mrs. Darling found things she could not understand, and of these quite the most perplexing was the word Peter. She knew of no Peter, and yet he was here and there in John and Michael's minds, while Wendy's began to be scrawled all over with him. The name stood out in bolder letters than any of the other words, and as Mrs. Darling gazed she felt that it had an oddly cocky appearance.
+# Wrap it up into automatic macro
+
+Now when it comes to automating routine operations or performing it on a number of tables frameworks such as [dbt](https://docs.getdbt.com/) come very handy.
+
+It is possible to automate the whole cycle of operations and even put it on regular basis with dbt macro as simple as this:
+
+```
+  {{ redshift.compress_table('hevo',
+                              'wheely_prod_orders',
+                              drop_backup=False,
+                              comprows=1000000) }}
+```
+
+See the description of [dbt Redshift package](https://github.com/fishtown-analytics/redshift) as well as [compression macro source code](https://github.com/fishtown-analytics/redshift/blob/master/macros/compression.sql).
+
+Let us examine what is does underneath:
+
+```sql
+    -- ensure new table does not exist yet
+    drop table if exists "hevo"."wheely_prod_orders__compressed";
+    -- CREATE new table with new encodings
+    create table "hevo"."wheely_prod_orders__compressed" (
+        -- COLUMNS
+        "_id" VARCHAR(512) encode raw  not null , 
+        "status" VARCHAR(512) encode zstd , 
+        "new_client" VARCHAR(512) encode zstd , 
+        "sorted_at" TIMESTAMP WITHOUT TIME ZONE encode az64 ,         
+        "transfer_other_zone_id" VARCHAR(512) encode lzo ,
+        "ts" VARCHAR(512) encode lzo ,
+        ...
+        -- CONSTRAINTS
+        , PRIMARY KEY (_id)        
+    )
+    --KEYS
+        -- DIST
+         diststyle key 
+         distkey("_id") 
+        -- SORT
+         compound sortkey("_id")     
+    ;
+
+  -- perform deep copy  
+  insert into "hevo"."wheely_prod_orders__compressed" (
+        select * from "hevo"."wheely_prod_orders"
+    );
+
+  -- perform atomic table interchange  
+  begin;
+    -- drop table if exists "hevo"."wheely_prod_orders__backup" cascade;
+    alter table "hevo"."wheely_prod_orders" rename to "wheely_prod_orders__backup";
+    alter table "hevo"."wheely_prod_orders__compressed" rename to "wheely_prod_orders";
+  commit;
+```
+
+# Assess the results
+
+Let us dive into the results.
+
+Compression (before, after, manual)
+
+\+ Visualization
+
+# Key outputs
+
+1. Thoroughly assess the result and queries performance. The main goal is still retain query speed and performance while improve disk usage and IO.
+2. Consider [ZSTD](https://github.com/facebook/zstd) compression algorithm. According to [Redshift doc page](https://docs.aws.amazon.com/redshift/latest/dg/zstd-encoding.html):
+
+> Zstandard (ZSTD) encoding provides a high compression ratio with very good performance across diverse datasets. ZSTD works especially well with CHAR and VARCHAR columns that store a wide range of long and short strings, such as product descriptions, user comments, logs, and JSON strings. Where some algorithms, such as [Delta](https://docs.aws.amazon.com/redshift/latest/dg/c_Delta_encoding.html) encoding or [Mostly](https://docs.aws.amazon.com/redshift/latest/dg/c_MostlyN_encoding.html) encoding, can potentially use more storage space than no compression, ZSTD is very unlikely to increase disk usage.
+
+1. Wrap it up into a macro that could be run on a regular basis
+
+Feel free to leave any comments or questions.
