@@ -59,10 +59,10 @@ Now when it comes to automating routine operations or performing it on a number 
 It is possible to automate the whole cycle of operations and even put it on regular basis with dbt macro as simple as this:
 
 ```javascript
-{%- raw -%}{{ redshift.compress_table('hevo',
+{%- raw %}{{ redshift.compress_table('hevo',
                               'wheely_prod_orders',
                               drop_backup=False,
-                              comprows=1000000) }} {%- endraw -%}
+                              comprows=1000000) }} {%- endraw %}
 ```
 
 See the description of [dbt Redshift package](https://github.com/fishtown-analytics/redshift) as well as [compression macro source code](https://github.com/fishtown-analytics/redshift/blob/master/macros/compression.sql).
