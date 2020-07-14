@@ -35,15 +35,15 @@ ANALYZE COMPRESSION hevo.wheely_prod_orders__backup COMPROWS 1000000 ;
 
 Here is the sample output:
 
-|Table|Column|Encoding|Est_reduction_pct|
-|-----|------|--------|-----------------|
-|wheely_prod_orders|_id|raw|0.00|
-|wheely_prod_orders|status|zstd|49.93|
-|wheely_prod_orders|new_client|zstd|39.04|
-|wheely_prod_orders|markup|zstd|99.66|
-|wheely_prod_orders|country_code|zstd|60.67|
-|wheely_prod_orders|tips|zstd|83.34|
-|wheely_prod_orders|tags|zstd|35.80|
+| Table | Column | Encoding | Est_reduction_pct |
+| --- | --- | --- | --- |
+| wheely_prod_orders | _id | raw | 0.00 |
+| wheely_prod_orders | status | zstd | 49.93 |
+| wheely_prod_orders | new_client | zstd | 39.04 |
+| wheely_prod_orders | markup | zstd | 99.66 |
+| wheely_prod_orders | country_code | zstd | 60.67 |
+| wheely_prod_orders | tips | zstd | 83.34 |
+| wheely_prod_orders | tags | zstd | 35.80 |
 
 Your next steps would be:
 
@@ -58,11 +58,11 @@ Now when it comes to automating routine operations or performing it on a number 
 
 It is possible to automate the whole cycle of operations and even put it on regular basis with dbt macro as simple as this:
 
-```
-  {{ redshift.compress_table('hevo',
+```javascript
+{%- raw -%}{{ redshift.compress_table('hevo',
                               'wheely_prod_orders',
                               drop_backup=False,
-                              comprows=1000000) }}
+                              comprows=1000000) }} {%- endraw -%}
 ```
 
 See the description of [dbt Redshift package](https://github.com/fishtown-analytics/redshift) as well as [compression macro source code](https://github.com/fishtown-analytics/redshift/blob/master/macros/compression.sql).
