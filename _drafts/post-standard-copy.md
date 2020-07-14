@@ -60,9 +60,9 @@ It is possible to automate the whole cycle of operations and even put it on regu
 
 ```javascript
 {% raw %}{{ redshift.compress_table('hevo',
-                              'wheely_prod_orders',
-                              drop_backup=False,
-                              comprows=1000000) }} {% endraw %}
+                                    'wheely_prod_orders',
+                                    drop_backup=False,
+                                    comprows=1000000) }} {% endraw %}
 ```
 
 See the description of [dbt Redshift package](https://github.com/fishtown-analytics/redshift) as well as [compression macro source code](https://github.com/fishtown-analytics/redshift/blob/master/macros/compression.sql).
@@ -108,11 +108,17 @@ Let us examine what is does underneath:
 
 # Assess the results
 
-Let us dive into the results.
+I have performed compression routine on a number of tables and now it is time to examine the results.
 
-Compression (before, after, manual)
+![Disk space usage before and after compression](/uploads/sql__ykmkn6prdnkvzs-sql_runner_query-2020-07-14t1515.png "Redshift compression results")
 
-\+ Visualization
+The compression rate varies widely from **67%** to **-9%** which tells us automatic compression is not suitable for every case.
+
+![Compression rate of table disk space before and after](/uploads/sql__ykmkn6prdnkvzs-sql_runner_query-2020-07-14t1520.png "Redshift compression results")
+
+Even though we have _obligations_ table with negative result we see **21.5%** on average disk space usage reduction.
+
+Before you apply any changes make sure to assess query performance and short-list tables which are to be compressed. In my case I am compressing every table except _obligations_ which I will leave as-is.
 
 # Key outputs
 
@@ -121,6 +127,6 @@ Compression (before, after, manual)
 
 > Zstandard (ZSTD) encoding provides a high compression ratio with very good performance across diverse datasets. ZSTD works especially well with CHAR and VARCHAR columns that store a wide range of long and short strings, such as product descriptions, user comments, logs, and JSON strings. Where some algorithms, such as [Delta](https://docs.aws.amazon.com/redshift/latest/dg/c_Delta_encoding.html) encoding or [Mostly](https://docs.aws.amazon.com/redshift/latest/dg/c_MostlyN_encoding.html) encoding, can potentially use more storage space than no compression, ZSTD is very unlikely to increase disk usage.
 
-1. Wrap it up into a macro that could be run on a regular basis
+3. Wrap it up into a macro that could be run automatically on a regular basis.
 
 Feel free to leave any comments or questions.
