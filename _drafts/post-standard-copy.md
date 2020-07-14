@@ -4,9 +4,10 @@ excerpt_separator: "<!--more-->"
 categories:
 - Blog
 tags:
-- Post Formats
-- readability
-- standard
+- Redshift
+- Compression
+- ZSTD
+- Encoding
 
 ---
 # Basics
