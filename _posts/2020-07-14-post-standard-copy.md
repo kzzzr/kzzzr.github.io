@@ -14,7 +14,7 @@ tags:
 
 Amazon Redshift is database aimed primarily on analytics and OLAP queries.
 
-One if its key features is storing data in columnar format, in other words keeping one column's data adjacent on disk.
+One of its key features is storing data in columnar format, in other words keeping one column's data adjacent on disk.
 
 That enables storing higher volumes of data compared to row formats due to encoding algorithms and one column's homogenous data nature (it compresses very well).
 
@@ -128,6 +128,6 @@ Before you apply any changes make sure to assess query performance and short-lis
 
 > Zstandard (ZSTD) encoding provides a high compression ratio with very good performance across diverse datasets. ZSTD works especially well with CHAR and VARCHAR columns that store a wide range of long and short strings, such as product descriptions, user comments, logs, and JSON strings. Where some algorithms, such as [Delta](https://docs.aws.amazon.com/redshift/latest/dg/c_Delta_encoding.html) encoding or [Mostly](https://docs.aws.amazon.com/redshift/latest/dg/c_MostlyN_encoding.html) encoding, can potentially use more storage space than no compression, ZSTD is very unlikely to increase disk usage.
 
-3. Wrap it up into a macro that could be run automatically on a regular basis.
+1. Wrap it up into a macro that could be run automatically on a regular basis.
 
 Feel free to leave any comments or questions.
