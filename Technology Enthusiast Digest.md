@@ -89,9 +89,50 @@ At the end you will find **TBD** heading with posts to be done. Please comment o
 
 ## TBD
 
+Deep dive to Data Quality:
+
+* Data Quality update
+
+\- cross comparison
+
+\- main problems:
+
+\- mismatch: replication not synced
+
+\- missing in source: file headers
+
+\- missing in target: replay (ETL pipeline failure)
+
+\- alerts on warnings
+
+* Configuring **Slim CI** for your Data Warehouse
+  * Only test models have been modified since last time tested
+  * Ensure code quality
+  * Make it really fast
+* RFM analytics
+  * Assessing customer retention
+  * Training and deploying ML model
+  * Recency, frequency, monetary value
+* Orchestrating your pipelines. dbt vs Airflow?
+  * What is the difference
+  * Prefect / Dagster
+* Examples of how to avoid complexity (refactoring)
+  * KISS: as simple as possible. 
+  * Simplifying complex domain: Journeys
+  * Currency conversion macro
+  * Geospatial: hexagons, cities
+* Advanced Data Quality
+  * Comparing Source <-> Target continuously
+  * Using shell scripts and S3 to sync data
+  * Capturing discrepancies with Looker dashboards
+  * Reloading data (fixing)
+* Pandas exclusive lock on a table
+  * Don’t forget to close connection, or ETL pipelines will get stuck
+
+
 * [myBI connect](http://connect.mybi.ru/) overview
   * multiple connectors
-  * advanced features
+  * advanced features: cube.js, webhook, custom reports
   * monitoring and data quality
 
 
