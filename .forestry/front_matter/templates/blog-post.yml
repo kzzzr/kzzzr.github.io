@@ -2,3 +2,5 @@
 label: Blog post
 hide_body: false
 fields: []
+pages:
+- Technology Enthusiast Digest.md
