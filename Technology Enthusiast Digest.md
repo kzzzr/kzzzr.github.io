@@ -89,22 +89,79 @@ At the end you will find **TBD** heading with posts to be done. Please comment o
 
 ## TBD
 
-Deep dive to Data Quality:
+* How to refactor code
+  * Why do it: easily extendible and develop in future
+  * Before and after
+  * DRY: using macros 
+  * Ex:  Separate window functions from large calculations
+  * Ex: journeys pipeline
+  * Ex: financial metrics (gather and calculate them all in one place)
 
-* Data Quality update
 
-\- cross comparison
+* Bulk load from MongoDB
+  * mongoexport cli
+  * Arrays, query, time filter by ObjectId
+  * field list
+  * handle ObjectId to string
+  * upload to S3
+  * copy from s3 to Redshift
 
-\- main problems:
 
-\- mismatch: replication not synced
+* Online Transformations in ELT pipeline (streaming transformations)
+  * Removing PII: Masking and hashing data
+  * Get country code from phone numbers
+  * Flattening data
+  * Hevo capabilites & showcase
+* How to choose ELT provider: points to consider + benchmarking
+  * Fivetran vs Hevo vs Stitch vs Alooma
+  * available sources
+  * user interface
+  * historical load
+  * online replication + log reading
+  * transformations on the fly
+  * destinations
+  * handling nested data and json
+  * flexibility: reload data
+  * mapping: choose tables and fields to load
+* What is bitmask and how to use it
+  * Why use bit mask
+  * How to optimally encode several dimensions in a single field
+  * How to work with bit mask in Redshift
+* **Redshift** optimizations techniques:
+  * refactoring SQL (requests, zones, quotes)
+  * dist keys + sort keys: compound & interleaved
+  * pre-calculating: materialized views, Persistent Derived Tables
+  * compression
+  * vacuum+analyze hooks
+* Capturing user Events with **Snowplow**
+  * Cross-platform / App / Web events
+  * Sending payload on the webhook
+  * Parsing & analyzing data
+  * Capabilities & limitations
 
-\- missing in source: file headers
 
-\- missing in target: replay (ETL pipeline failure)
-
-\- alerts on warnings
-
+* Обзор Open Source BI **Metabase**
+  * Open source BI vs Proprietary
+  * Плюсы: быстро, просто, красиво, функционально
+  * Минусы: недостаточно визуализаций (каскадная таблица), недоступны сложные вычисления, иногда требуется конфигурация типов полей, drill-down слабоват
+* Monitoring dbt deployments
+  * logging module: fork + schema configuration
+  * hook on each action
+  * models: deployments + model deployments
+  * tiles + dashboard + filters
+  * key results and observes
+* Reload data from MongoDB to DWH
+  * Specific rows (ObjectIds)
+  * mongoshell & mongoexport utilities
+  * arrays, query, time filter by ObjectId
+  * examples of Shell + sql scripts
+* Deep dive to Data Quality:
+  * Schema test: not null, unique, reference, accepted values
+  * Freshness tests. Is data up to date?
+  * mismatch: replication not synced
+  * missing in source: file headers
+  * missing in target: replay (ETL pipeline failure)
+  * alerts on warnings
 * Configuring **Slim CI** for your Data Warehouse
   * Only test models have been modified since last time tested
   * Ensure code quality
