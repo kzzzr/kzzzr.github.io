@@ -14,6 +14,16 @@ At the end you will find **TBD** heading with posts to be done. Please comment o
 
 ## 2021 Mar
 
+(RU) – [Мультитул для управления Хранилищем Данных — кейс Wheely + dbt](https://habr.com/ru/company/wheely/blog/549614/)
+
+* 2+ года dbt в продакшн в управлении Хранилищем Данных.
+* Структура хранилища + бизнес-вертикали
+* Оптимизация физического хранения в Redshift
+* SQL + Jinja = Flexibility
+* Macro: UDF, currency exchange
+* Importing modules: calendar, external data, logging
+* Deployment with dbt Cloud: Schedule + Webhooks, Slack notifications
+
 (RU) – [ОБЗОР LOOKER - БОЛЬШЕ ЧЕМ ПРОСТО BI](https://youtu.be/-YMCafO_cZk)
 
 Сегодня приглашаю на вебинар по **Looker** - топовый BI-инструмент на рынке!
@@ -78,3 +88,49 @@ At the end you will find **TBD** heading with posts to be done. Please comment o
 * **Airflow** для оркестрации прикладных задач: бизнес-планирование в **Notion.so**
 
 ## TBD
+
+* [myBI connect](http://connect.mybi.ru/) overview
+  * multiple connectors
+  * advanced features
+  * monitoring and data quality
+
+
+* Delivering reports to Notion
+  * Notion API for Python (unofficial)
+  * Looker API: fetching dashboards
+  * Posting to Notion page (defined by YAML configuration)
+* Redshift maintenance operations
+  * Vacuum + analyze
+  * Using External tables with Spectrum
+  * Unloading data to S3
+* Marketing Data Pipeline at Wheely
+  * merging offline + online, sheets and automated data exports
+  * refactoring sql: easy, readable, maintainable
+  * connecting sources: gs, adv
+  * sheets structure
+  * partnerships logic
+  * dbt models + merge logic
+* Data Vault 2.0 
+  * Code generation basics
+  * dbt + Data Vault = dbtvault
+  * Examples
+
+
+* Data Warehouse / Cluster definition code
+  * Schemas + Groups + Users
+  * Ensure policies and access segregation
+  * Workload Management (Divide into Queues)
+
+
+* [Pandas Data Analytics Showcase – Kiva.org](https://github.com/kzzzr/skillbox-kiva)
+  * Basics and advanced of pandas and visualizations
+  * Exploratory Data Analysis
+  * Summarizing and presenting results
+
+
+* PostgreSQL production load troubleshooting
+  * Identifying root problems with queries
+  * Turning on query logging
+  * Index & table bloat
+  * VACUUM ANALYZE & REINDEX CONCURRENTLY
+  * Summarizing and presenting results
