@@ -97,6 +97,26 @@ At the end you will find **TBD** heading with posts to be done. Please comment o
 
 (RU) – [Кто ответит за качество аналитики: QA для Хранилища Данных](https://habr.com/ru/company/otus/blog/526174/)
 
+* Поверь своим глазам и тому что видишь на Дашборде
+* Уверенность в актуальности витрин данных
+* Мониторинг метрик расчета Витрин Данных
+* Валидация схемы данных в основе тестирования
+* Бизнес-логика тоже подлежит проверке
+* Continuous Integration на страже мастер-ветки DWH
+* Кросс-сверка состояния DWH и Источников
+
+(RU) – [Data Build Tool или что общего между Хранилищем Данных и Смузи](https://habr.com/ru/company/otus/blog/501380/)
+
+* DBT — это всё о букве T в акрониме ELT (Extract — Transform — Load).
+* Структура проекта DBT: .sql + .yaml
+* Всё есть SELECT: no boilerplate code
+* Материализация: Table, View, Incremental
+* Граф зависимостей моделей
+* Качество данных и Документация
+* Макросы и Модули
+* Разделение сред исполнения DEV — TEST — PROD
+* dbt Cloud
+
 ## TBD
 
 * How to refactor code
