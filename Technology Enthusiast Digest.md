@@ -78,7 +78,7 @@ At the end you will find **TBD** heading with posts to be done. Please comment o
 * Дашбординг с **Metabase**
 * Рейтинг проблем: разметка, CRM, матчинг и атрибуция, хеш-ключи
 
-## 2020 Dec
+## 2020
 
 (RU) – [Дата-инжиниринг в превосходных условиях](https://habr.com/ru/company/wheely/blog/535476/)
 
@@ -86,6 +86,16 @@ At the end you will find **TBD** heading with posts to be done. Please comment o
 * **MongoDB**: Специфика документ-ориентированного хранения (semi-structured & nested data)
 * Пылесосинг данных: облачный ETL **Hevo** Data
 * **Airflow** для оркестрации прикладных задач: бизнес-планирование в **Notion.so**
+
+(ENG) – [Compressing Redshift columnar data even further with proper encodings](https://kzzzr.github.io/blog/compressing-redshift-columnar-data-even-further-with-proper-encodings/)
+
+* Basics of compression encodings
+* Questioning default compression options
+* ANALYZE COMPRESSION
+* Wrap it up into automatic macro
+* Assessing results
+
+(RU) – [Кто ответит за качество аналитики: QA для Хранилища Данных](https://habr.com/ru/company/otus/blog/526174/)
 
 ## TBD
 
