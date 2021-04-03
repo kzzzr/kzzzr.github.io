@@ -139,7 +139,6 @@ At the end you will find **TBD** heading with posts to be done. Please comment w
   * Ex:  Separate window functions from large calculations
   * Ex: journeys pipeline
   * Ex: financial metrics (gather and calculate them all in one place)
-
 * Bulk load from MongoDB
   * mongoexport cli
   * Arrays, query, time filter by ObjectId
@@ -147,13 +146,11 @@ At the end you will find **TBD** heading with posts to be done. Please comment w
   * handle ObjectId to string
   * upload to S3
   * copy from s3 to Redshift
-
 * Online Transformations in ELT pipeline (streaming transformations)
   * Removing PII: Masking and hashing data
   * Get country code from phone numbers
   * Flattening data
   * Hevo capabilites & showcase
-
 * How to choose ELT provider: points to consider + benchmarking
   * Fivetran vs Hevo vs Stitch vs Alooma
   * available sources
@@ -165,43 +162,36 @@ At the end you will find **TBD** heading with posts to be done. Please comment w
   * handling nested data and json
   * flexibility: reload data
   * mapping: choose tables and fields to load
-
 * What is bitmask and how to use it
   * Why use bit mask
   * How to optimally encode several dimensions in a single field
   * How to work with bit mask in Redshift
-
 * **Redshift** optimizations techniques:
   * refactoring SQL (requests, zones, quotes)
   * dist keys + sort keys: compound & interleaved
   * pre-calculating: materialized views, Persistent Derived Tables
   * compression
   * vacuum+analyze hooks
-
 * Capturing user Events with **Snowplow**
   * Cross-platform / App / Web events
   * Sending payload on the webhook
   * Parsing & analyzing data
   * Capabilities & limitations
-
 * Обзор Open Source BI **Metabase**
   * Open source BI vs Proprietary
   * Плюсы: быстро, просто, красиво, функционально
   * Минусы: недостаточно визуализаций (каскадная таблица), недоступны сложные вычисления, иногда требуется конфигурация типов полей, drill-down слабоват
-
 * Monitoring dbt deployments
   * logging module: fork + schema configuration
   * hook on each action
   * models: deployments + model deployments
   * tiles + dashboard + filters
   * key results and observes
-
 * Reload data from MongoDB to DWH
   * Specific rows (ObjectIds)
   * mongoshell & mongoexport utilities
   * arrays, query, time filter by ObjectId
   * examples of Shell + sql scripts
-
 * Deep dive to Data Quality:
   * Schema test: not null, unique, reference, accepted values
   * Freshness tests. Is data up to date?
@@ -209,51 +199,41 @@ At the end you will find **TBD** heading with posts to be done. Please comment w
   * missing in source: file headers
   * missing in target: replay (ETL pipeline failure)
   * alerts on warnings
-
 * Configuring **Slim CI** for your Data Warehouse
   * Only test models have been modified since last time tested
   * Ensure code quality
   * Make it really fast
-
 * RFM analytics
-  * Assessing customer retention
-  * Training and deploying ML model
   * Recency, frequency, monetary value
-
+  * Assessing customer retention
+  * Comparing [Lifetimes](https://pypi.org/project/Lifetimes/) library and [RFM segmentation](https://github.com/eugeneks/datalearn_sql_cases) by [eugeneks](https://github.com/eugeneks)
 * Orchestrating your pipelines. dbt vs Airflow?
   * What is the difference
   * Prefect / Dagster
-
 * Examples of how to avoid complexity (refactoring)
   * KISS: as simple as possible.
   * Simplifying complex domain: Journeys
   * Currency conversion macro
   * Geospatial: hexagons, cities
-
 * Advanced Data Quality
   * Comparing Source <-> Target continuously
   * Using shell scripts and S3 to sync data
   * Capturing discrepancies with Looker dashboards
   * Reloading data (fixing)
-
 * Pandas exclusive lock on a table
   * Don’t forget to close connection, or ETL pipelines will get stuck
-
 * [myBI connect](http://connect.mybi.ru/) overview
   * multiple connectors
   * advanced features: cube.js, webhook, custom reports
   * monitoring and data quality
-
 * Delivering reports to Notion
   * Notion API for Python (unofficial)
   * Looker API: fetching dashboards
   * Posting to Notion page (defined by YAML configuration)
-
 * Redshift maintenance operations
   * Vacuum + analyze
   * Using External tables with Spectrum
   * Unloading data to S3
-
 * Marketing Data Pipeline at Wheely
   * merging offline + online, sheets and automated data exports
   * refactoring sql: easy, readable, maintainable
@@ -261,22 +241,18 @@ At the end you will find **TBD** heading with posts to be done. Please comment w
   * sheets structure
   * partnerships logic
   * dbt models + merge logic
-
 * Data Vault 2.0
   * Code generation basics
   * dbt + Data Vault = dbtvault
   * Examples
-
 * Data Warehouse / Cluster definition code
   * Schemas + Groups + Users
   * Ensure policies and access segregation
   * Workload Management (Divide into Queues)
-
 * [Pandas Data Analytics Showcase – Kiva.org](https://github.com/kzzzr/skillbox-kiva)
   * Basics and advanced of pandas and visualizations
   * Exploratory Data Analysis
   * Summarizing and presenting results
-
 * PostgreSQL production load troubleshooting
   * Identifying root problems with queries
   * Turning on query logging
