@@ -23,6 +23,6 @@ An outstanding solution has to include Software Engineering best practices and c
 
 For these purposes I want to leverage the whole power of cloud services and modern data stack: Azure SQL, dbt, Github Actions, Metabase.
 
-**_![For these purposes I want to leverage the whole power of cloud services and modern data stack: Azure SQL, dbt, Github Actions, Metabase.](https://lh5.googleusercontent.com/_NioBobl7L1w1rfgdXyUQ6Ti3SBQ5-ALt8wXKaBx24Hg5BXI_Pd7YfKqd5quQ8TkZ7mplWRl9lhdXMiOUlW1eMWzVtFOinsQIS9PDj13YR_wFoIOyc1J9bNRRuCKCkRY3cFPrBnu "For these purposes I want to leverage the whole power of cloud services and modern data stack: Azure SQL, dbt, Github Actions, Metabase." =624x325)_**
+![](/uploads/_niobobl7l1w1rfgdxyuq6ti3sbq5-alt8wxkabx24hg5bxi_pd7yfkqd5quq8tkz7mplwrl9lhdxmioulw1emwzvtfoinsqis9pdj13yr_wfoioyc1j9bnrruckckry3cfprbnu.png)
 
 In the next post I will cover the building blocks of my solution.
