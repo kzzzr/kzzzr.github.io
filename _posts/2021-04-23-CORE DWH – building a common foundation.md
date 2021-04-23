@@ -36,20 +36,6 @@ ENV DBT_PROFILES_DIR=.
 ENTRYPOINT [ "/bin/bash" ]
 {% endhighlight %}
 
-\`\`\`
-
-function test() {
-
-  console.log("notice the blank line before this function?");
-
-}
-
-\`\`\`
-
-
-\`\`\`
-
-
 
 Here I do some steps:
 
