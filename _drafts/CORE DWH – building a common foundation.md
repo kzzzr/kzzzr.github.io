@@ -1,8 +1,6 @@
 ---
 
 ---
-# CORE DWH – building a common foundation
-
 Plugging source data is pretty simple. You just subscribe to a plan, authorize your accounts, configure pipelines and it just works by filling tables with new data continuously.
 
 **_![](https://lh4.googleusercontent.com/updr0D4uK4BQjF7GIhRT71i6-WIyIrrO-hsuYPmdw8d4CDDE7dmYu-7UeToHOEpFW1LiVYOBOcMSsJKoGk2w6k3UNZdjK64cSnPzrDkWCG3YJ5CVR4RcQJ6_91v73xph6U4ejhg3 =624x240)_**
@@ -35,7 +33,6 @@ See the [Dockerfile](https://github.com/kzzzr/mybi-dbt-core/blob/master/Dockerfi
      
     # ENTRYPOINT ["tail", "-f", "/dev/null"]
     ENTRYPOINT [ "/bin/bash" ]
-    
 
 Here I do some steps:
 
