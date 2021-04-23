@@ -11,7 +11,7 @@ myBI uses Azure SQL as a backend to store collected data in. Azure SQL descends 
 
 See the [Dockerfile](https://github.com/kzzzr/mybi-dbt-core/blob/master/Dockerfile):
 
-{% highlight Dockerfile %}
+{% highlight Dockerfile linenos %}
 ARG DBT_VERSION=0.19.1
 FROM fishtownanalytics/dbt:${DBT_VERSION}
  
