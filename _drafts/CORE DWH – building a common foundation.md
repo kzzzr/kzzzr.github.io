@@ -13,6 +13,16 @@ See the [Dockerfile](https://github.com/kzzzr/mybi-dbt-core/blob/master/Dockerfi
 
 \`\`\`
 
+function test() {
+
+  console.log("notice the blank line before this function?");
+
+}
+
+\`\`\`
+
+\`\`\`
+
 ARG DBT_VERSION=0.19.1
 
 FROM fishtownanalytics/dbt:${DBT_VERSION}
