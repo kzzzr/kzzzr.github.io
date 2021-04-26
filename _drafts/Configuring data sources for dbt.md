@@ -34,4 +34,6 @@ _Identifier_ key is the full name to reference a source table in a database, whi
 By labeling sources with _tags_ you can select, run or test certain parts of your DWH, for example you might want to rebuild models depending on a particular source after fixing a bug.
 
   
-**_list particular sources command and output_**
+Listing particular sources with `dbt ls` command and specifying source names:
+
+![](https://habrastorage.org/webt/ft/wg/zq/ftwgzq9mcxfshm0vjdibiw44ciq.gif)
