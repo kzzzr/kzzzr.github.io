@@ -4,6 +4,7 @@
 [sources.yml](https://github.com/kzzzr/mybi-dbt-core/blob/master/models/sources/sources.yml) describes how to reach tables created by ELT service
 
 {% highlight yaml %}
+{% raw %}
    - name: metrika
      database: "'{{ env_var('DBT_MSSQL_DATABASE') '}}"
      schema: "{{ env_var('DBT_MSSQL_SCHEMA') }}"
@@ -22,4 +23,5 @@
          identifier: metrika_goals
        - name: purchases
          identifier: metrika_purchases
+{% endraw %}         
 {% endhighlight %}
