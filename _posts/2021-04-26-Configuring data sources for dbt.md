@@ -23,8 +23,8 @@
          identifier: metrika_goals
        - name: purchases
          identifier: metrika_purchases
-    {% endraw %}  
-    {% endhighlight %}
+{% endraw %}  
+{% endhighlight %}
 
 Mind the **_database_** and **_schema_** keys. They might vary between projects and deployments so they are configured as environment variables. I will show you where they get actual values a little bit later.
 
