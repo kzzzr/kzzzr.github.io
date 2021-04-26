@@ -27,9 +27,9 @@
     {% endraw %}  
     {% endhighlight %}
 
-Mind the _database_ and _schema_ keys. They might vary between projects and deployments so they are configured as environment variables. I will show you where they get actual values a little bit later.
+Mind the **_database_** and **_schema_** keys. They might vary between projects and deployments so they are configured as environment variables. I will show you where they get actual values a little bit later.
 
-_Identifier_ key is the full name to reference a source table in a database, while _name_ key works like an alias for referencing a table in dbt code. It comes pretty handy if you have long table names.
+**_Identifier_** key is the full name to reference a source table in a database, while _name_ key works like an alias for referencing a table in dbt code. It comes pretty handy if you have long table names.
 
 By labeling sources with _tags_ you can select, run or test certain parts of your DWH, for example you might want to rebuild models depending on a particular source after fixing a bug.
 
