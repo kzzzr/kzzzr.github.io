@@ -5,7 +5,7 @@
 
 {% highlight yaml %}
    - name: metrika
-     database: "\{{ env_var('DBT_MSSQL_DATABASE') \}}"
+     database: "'{{ env_var('DBT_MSSQL_DATABASE') '}}"
      schema: "{{ env_var('DBT_MSSQL_SCHEMA') }}"
      description: Yandex.Metrika
      tags: ['metrika']
