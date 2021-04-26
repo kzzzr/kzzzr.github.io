@@ -35,4 +35,4 @@ By labeling sources with _tags_ you can select, run or test certain parts of you
   
 Listing particular sources with `dbt ls` command and specifying source names:
 
-![](https://habrastorage.org/webt/ft/wg/zq/ftwgzq9mcxfshm0vjdibiw44ciq.gif)
+[![](https://habrastorage.org/webt/ft/wg/zq/ftwgzq9mcxfshm0vjdibiw44ciq.gif)](https://habrastorage.org/webt/ft/wg/zq/ftwgzq9mcxfshm0vjdibiw44ciq.gif)
