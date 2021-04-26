@@ -5,27 +5,26 @@
 
 {% highlight yaml %}
 {% raw %}
-
-* name: metrika
-  database: "'{{ env_var('DBT_MSSQL_DATABASE') '}}"
-  schema: "{{ env_var('DBT_MSSQL_SCHEMA') }}"
-  description: Yandex.Metrika
-  tags: \['metrika'\]
-  tables:
-  * name: sessions_facts
-    identifier: metrika_sessions_facts
-  * name: goals_facts
-    identifier: metrika_goals_facts
-  * name: purchases_facts
-    identifier: metrika_purchases_facts
-  * name: devices
-    identifier: metrika_devices
-  * name: goals
-    identifier: metrika_goals
-  * name: purchases
-    identifier: metrika_purchases
-    {% endraw %}  
-    {% endhighlight %}
+   - name: metrika
+     database: "{{ env_var('DBT_MSSQL_DATABASE') }}"
+     schema: "{{ env_var('DBT_MSSQL_SCHEMA') }}"
+     description: Yandex.Metrika
+     tags: ['metrika']
+     tables:  
+       - name: sessions_facts
+         identifier: metrika_sessions_facts
+       - name: goals_facts
+         identifier: metrika_goals_facts
+       - name: purchases_facts
+         identifier: metrika_purchases_facts
+       - name: devices
+         identifier: metrika_devices
+       - name: goals
+         identifier: metrika_goals
+       - name: purchases
+         identifier: metrika_purchases
+{% endraw %}  
+{% endhighlight %}
 
 Mind the _database_ and _schema_ keys. They might vary between projects and deployments so they are configured as environment variables. I will show you where they get actual values a little bit later.
 
