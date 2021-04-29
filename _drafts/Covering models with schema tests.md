@@ -66,4 +66,4 @@ Comprehensive enough to find any discrepancy, bug or undesired condition in your
 
 There are precisely **335** tests for **56** models which stands for around **600%** test coverage (click to expand):
 
-![](https://habrastorage.org/webt/vr/z1/f5/vrz1f5ckzywcr7lsroumvr_urfo.gif)
+[![](https://habrastorage.org/webt/vr/z1/f5/vrz1f5ckzywcr7lsroumvr_urfo.gif)](https://habrastorage.org/webt/vr/z1/f5/vrz1f5ckzywcr7lsroumvr_urfo.gif)
