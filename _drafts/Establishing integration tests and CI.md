@@ -12,23 +12,19 @@ First I will spin up a MS SQL Server instance in a docker container to perform r
 {% highlight yaml %}
 {% raw %}
 
-version: '2'
-services:
-
-mssql:
-image: mcr.microsoft.com/mssql/server:2019-latest
-environment:
-ACCEPT_EULA: "Y"
-SA_PASSWORD: "P@ssword"
-ports:
-\- "1433:1433"
-
-dbt:
-build: .
-entrypoint: /bin/bash
-tty: true
-volumes:
-\- .:/usr/app/mybi-dbt-core
+   image: mcr.microsoft.com/mssql/server:2019-latest
+   environment:
+     ACCEPT_EULA: "Y"
+     SA_PASSWORD: "P@ssword"
+   ports:
+     - "1433:1433"
+ 
+ dbt:
+   build: .
+   entrypoint: /bin/bash
+   tty: true
+   volumes:
+    - .:/usr/app/mybi-dbt-core
 
 {% endraw %}
 {% endhighlight %}
