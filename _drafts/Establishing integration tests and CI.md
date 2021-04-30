@@ -57,7 +57,50 @@ Things are a bit more complicated, since I have to create a separate dbt project
 {% raw %}
 
 packages:
-   - local: ../
-   
+
+* local: ../
+
 {% endraw %}
-{% endhighlight %}   
+{% endhighlight %}
+
+Thirdly, the key idea is to automate my workflow with [Github Actions](https://github.com/features/actions). As a reused module CORE DWH is subject to frequent changes, hotfixes, new sources expansion. I want any change to CORE DWH repo to be fully tested and ensure no errors are introduced.
+
+Take a look at the file [dbt_mssql_ci.yml](https://github.com/kzzzr/mybi-dbt-core/blob/master/.github/workflows/dbt_mssql_ci.yml):
+
+{% highlight yaml %}
+{% raw %}
+name: CI dbt on mssql
+ 
+# Controls when the action will run.
+on:
+ pull_request:
+   branches: [ master ]
+ 
+jobs:
+ dbt_ci:   
+   services:
+     mssql:
+       image: mcr.microsoft.com/mssql/server:2019-latest
+       env:
+         ACCEPT_EULA: Y
+         SA_PASSWORD: P@ssword
+       ports:
+         - 1433:1433
+   runs-on: ubuntu-latest
+   steps:
+     - uses: actions/checkout@v2
+     - name: wait for services to start up
+       run: sleep 30
+     - name: dbt mssql action
+       uses: kzzzr/mybi-dbt-action@v2
+       with:
+         project_dir: ./integration_tests
+       env:
+         DBT_MSSQL_TARGET: core_ci
+         DBT_MSSQL_SERVER: mssql
+         DBT_MSSQL_USER: sa
+         DBT_MSSQL_PASSWORD: P@ssword
+         DBT_MSSQL_DATABASE: master
+         DBT_MSSQL_SCHEMA: core_ci
+{% endraw %}
+{% endhighlight %}         
