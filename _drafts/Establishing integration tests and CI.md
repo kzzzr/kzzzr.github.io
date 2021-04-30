@@ -14,21 +14,21 @@ First I will spin up a MS SQL Server instance in a docker container to perform r
 
 version: '2'
 services:
-
-mssql:
-image: mcr.microsoft.com/mssql/server:2019-latest
-environment:
-ACCEPT_EULA: "Y"
-SA_PASSWORD: "P@ssword"
-ports:
-\- "1433:1433"
-
-dbt:
-build: .
-entrypoint: /bin/bash
-tty: true
-volumes:
-\- .:/usr/app/mybi-dbt-core
+ 
+ mssql:
+   image: mcr.microsoft.com/mssql/server:2019-latest
+   environment:
+     ACCEPT_EULA: "Y"
+     SA_PASSWORD: "P@ssword"
+   ports:
+     - "1433:1433"
+ 
+ dbt:
+   build: .
+   entrypoint: /bin/bash
+   tty: true
+   volumes:
+    - .:/usr/app/mybi-dbt-core
 
 {% endraw %}
 {% endhighlight %}
@@ -57,8 +57,7 @@ Things are a bit more complicated, since I have to create a separate dbt project
 {% raw %}
 
 packages:
-
-* local: ../
+   - local: ../
 
 {% endraw %}
 {% endhighlight %}
@@ -103,4 +102,23 @@ jobs:
          DBT_MSSQL_DATABASE: master
          DBT_MSSQL_SCHEMA: core_ci
 {% endraw %}
-{% endhighlight %}         
+{% endhighlight %}
+
+The workflow is defined like this:
+
+1. Triggered on Pull Requests to master branch.
+2. Spins up an already familiar MS SQL Server database in a container as a service.
+3. Performs several sequential steps: checking out the code, filling source tables from csv files, running models, testing them, cleaning up.
+4. Provides context with environment variables (connections details, target database schema name)
+
+[kzzzr/mybi-dbt-action@v2](https://github.com/kzzzr/mybi-dbt-action) is just a link to a Docker container action I created specifically to address dependencies and versions issues. I will dive into some details on it in a separate blog post.
+
+  
+You can see some historical CI actions run associated with merged Pull Requests. [PR #9 qualify macro reference with package name](https://github.com/kzzzr/mybi-dbt-core/pull/9).
+
+[![](https://habrastorage.org/webt/1e/sw/xh/1eswxhruottmndq76j6z4ywv0qg.png)](https://habrastorage.org/webt/1e/sw/xh/1eswxhruottmndq76j6z4ywv0qg.png)
+
+And here you can review the Action logs in detail: [https://github.com/kzzzr/mybi-dbt-core/runs/2314717891](https://github.com/kzzzr/mybi-dbt-core/runs/2314717891 "https://github.com/kzzzr/mybi-dbt-core/runs/2314717891")
+
+  
+[![](https://habrastorage.org/webt/-a/ma/pv/-amapvbisk_x6rnusaziwsl8-g0.gif)](https://habrastorage.org/webt/-a/ma/pv/-amapvbisk_x6rnusaziwsl8-g0.gif)
