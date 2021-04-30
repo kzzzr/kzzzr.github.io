@@ -11,3 +11,4 @@ pages:
 - _posts/2021-04-26-Configuring data sources for dbt.md
 - _posts/2021-04-27-Populating DWH staging area.md
 - _posts/2021-04-29-Covering models with schema tests.md
+- _posts/Establishing integration tests and CI.md
