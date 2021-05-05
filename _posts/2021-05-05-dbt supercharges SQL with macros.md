@@ -68,33 +68,19 @@ select
 HASHBYTES(
 
     'SHA2_256',
-
     concat(
-
         coalesce(cast(account_id as NVARCHAR), ''),
-
         '-',
-
         coalesce(cast(clientids_id as NVARCHAR), ''),
-
         '-',
-
         coalesce(cast(dates_id as NVARCHAR), ''),
-
         '-',
-
         coalesce(cast(traffic_id as NVARCHAR), ''),
-
         '-',
-
         coalesce(cast(locations_id as NVARCHAR), ''),
-
         '-',
-
         coalesce(cast(devices_id as NVARCHAR), '')
-
     )
-
 ) as id
 , f.account_id
 , f.clientids_id
