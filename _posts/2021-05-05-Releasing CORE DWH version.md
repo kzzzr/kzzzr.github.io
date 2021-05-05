@@ -20,10 +20,8 @@ Importing this module becomes as simple as this:
 
 {% highlight yaml %}
 {% raw %}
-
 packages:
  - git: "https://github.com/kzzzr/mybi-dbt-core.git"
-   revision: 0.2.0
-   
+   revision: 0.2.0   
 {% endraw %}
 {% endhighlight %}
