@@ -12,6 +12,6 @@ pages:
 - _posts/2021-04-27-Populating DWH staging area.md
 - _posts/2021-04-29-Covering models with schema tests.md
 - _posts/2021-04-30-Establishing integration tests and CI.md
+- _posts/2021-05-05-Generating concatenate and surrogate keys.md
 - _posts/2021-05-05-Releasing CORE DWH version.md
 - _posts/2021-05-05-dbt supercharges SQL with macros.md
-- _posts/Generating concatenate and surrogate keys.md
