@@ -7,7 +7,7 @@ With dbt you can leverage the full power of Jinja templating language in your SQ
 
 ## Flexible row filtering
 
-You have already seen _filter_rows()_ macro invocation in place of WHERE expression. It is used in every staging model. It helps fetch only relevant account rows and limit the number of rows for development and testing purposes if a table is large enough (especially useful for fact tables – sessions, hits, conversions).
+You have already seen _`filter_rows()`_ macro invocation in place of WHERE expression. It is used in every staging model. It helps fetch only relevant account rows and limit the number of rows for development and testing purposes if a table is large enough (especially useful for fact tables – sessions, hits, conversions).
 
 See the [stg_ym_sessions_facts](https://github.com/kzzzr/mybi-dbt-core/blob/master/models/staging/metrika/stg_ym_sessions_facts.sql) code:
 
@@ -65,7 +65,37 @@ with source as (
 
 select
 
-HASHBYTES('SHA2_256', concat(coalesce(cast(account_id as NVARCHAR ), ''), '-', coalesce(cast(clientids_id as NVARCHAR ), ''), '-', coalesce(cast(dates_id as NVARCHAR ), ''), '-', coalesce(cast(traffic_id as NVARCHAR ), ''), '-', coalesce(cast(locations_id as NVARCHAR ), ''), '-', coalesce(cast(devices_id as NVARCHAR ), ''))) as id
+HASHBYTES(
+
+    'SHA2_256',
+
+    concat(
+
+        coalesce(cast(account_id as NVARCHAR), ''),
+
+        '-',
+
+        coalesce(cast(clientids_id as NVARCHAR), ''),
+
+        '-',
+
+        coalesce(cast(dates_id as NVARCHAR), ''),
+
+        '-',
+
+        coalesce(cast(traffic_id as NVARCHAR), ''),
+
+        '-',
+
+        coalesce(cast(locations_id as NVARCHAR), ''),
+
+        '-',
+
+        coalesce(cast(devices_id as NVARCHAR), '')
+
+    )
+
+) as id
 , f.account_id
 , f.clientids_id
 , f.dates_id
@@ -132,8 +162,8 @@ and {{ limit_rows }}
 
 As a result WHERE expression consists of several parts:
 
-Filtering on account id if one is passed (or using 1 = 1 if none is passed)
-Limit the number of rows to 3 last days for ‘dev’ and ‘ci’ environments where turned on (fact tables)
+* Filtering on account id if one is passed (or using 1 = 1 if none is passed) 
+* Limit the number of rows to 3 last days for `dev` and `ci` environments where turned on (fact tables)
 
 Source systems account identifiers are supplied at project level in [dbt_project.yml](https://github.com/kzzzr/mybi-dbt-core/blob/master/dbt_project.yml) as variables:
 
