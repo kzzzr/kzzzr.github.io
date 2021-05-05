@@ -129,32 +129,32 @@ Here is the source code of macro [filter_rows](https://github.com/kzzzr/mybi-dbt
 {% highlight sql linenos %}
 {% raw %}
 
-\-- filter data for selected accounts, resize for dev, ci pipelines
+-- filter data for selected accounts, resize for dev, ci pipelines
 {% macro filter_rows(
-account_id=none,
-last_number_of_days=none,
-ts_field='dt'
+   account_id=none,
+   last_number_of_days=none,
+   ts_field='dt'
 ) -%}
-
-{#- prepare expression to filter on according account_id -#}
-{% if account_id -%}
-{%- set filter_account_id = 'account_id in (' \~ account_id \~ ')' -%}
-{% else -%}
-{%- set filter_account_id = '1 = 1' -%}
-{%- endif -%}
-
-{#- prepare expression to filter only last N days of data (e.g. last 3 days) -#}
-{%- if target.name in \['dev', 'ci'\] and last_number_of_days -%}
-{%- set limit_rows = ts_field \~ ' >= dateadd(day, ' \~ -var('filter_days_of_data') \~ ', convert(date, getdate()))' -%}
-{%- else -%}
-{%- set limit_rows = '1 = 1' -%}
-{%- endif -%}
-
-{#- prepare final filter expression -#}
-where 1 = 1
-and {{ filter_account_id }}
-and {{ limit_rows }}
-
+  
+   {#- prepare expression to filter on according account_id -#}
+   {% if account_id -%}
+       {%- set filter_account_id = 'account_id in (' ~ account_id ~ ')' -%}
+   {% else -%}
+       {%- set filter_account_id = '1 = 1' -%}
+   {%- endif -%}
+ 
+   {#- prepare expression to filter only last N days of data (e.g. last 3 days) -#}
+   {%- if target.name in ['dev', 'ci'] and last_number_of_days -%}
+       {%- set limit_rows = ts_field ~ ' >= dateadd(day, ' ~ -var('filter_days_of_data') ~ ', convert(date, getdate()))' -%}
+   {%- else -%}
+       {%- set limit_rows = '1 = 1' -%}
+   {%- endif -%}
+ 
+   {#- prepare final filter expression -#}
+   where 1 = 1
+       and {{ filter_account_id }}
+       and {{ limit_rows }}
+ 
 {%- endmacro -%}
 
 {% endraw %}
@@ -170,16 +170,16 @@ Source systems account identifiers are supplied at project level in [dbt_project
 {% highlight yaml linenos %}
 {% raw %}
 vars:
-filter_days_of_data: 3
-mybi_dbt_core:
-account_id_metrika: null
-account_id_b24: null
-account_id_direct: null
-account_id_facebook: null
-account_id_adwords: null
-account_id_mytarget: null
-account_id_amocrm: null  
-account_id_ga: null
+   filter_days_of_data: 3
+   mybi_dbt_core:
+       account_id_metrika: null
+       account_id_b24: null
+       account_id_direct: null
+       account_id_facebook: null
+       account_id_adwords: null
+       account_id_mytarget: null
+       account_id_amocrm: null       
+       account_id_ga: null
 {% endraw %}
 {% endhighlight %}
 
