@@ -12,7 +12,7 @@ git push origin 0.2.0 # push to origin
 
 {% endhighlight %}
 
-![](https://lh4.googleusercontent.com/zoqF1cfe78bBb3PL2J2jiwyzKAhUOUX9po2Hk1GiS2FEL2qVyaOvgt75Siksf52-yuCu5OcQg-weE583chp8NzwssTYkSE_0B4muGpimdRcPHONZF6NxHaRMH5zOjUZidG1l5nkH =624x225)
+[![](https://habrastorage.org/webt/iq/oe/c0/iqoec0kjply_cvccpeuxyxeqpey.png)](https://habrastorage.org/webt/iq/oe/c0/iqoec0kjply_cvccpeuxyxeqpey.png)
 
 Importing this module becomes as simple as this:
 
