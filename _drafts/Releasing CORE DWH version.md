@@ -3,7 +3,7 @@
 ---
 # Releasing CORE DWH version
 
-Now I would like to pin a specific version of code to a tag and release.
+Now I would like to pin a specific version of code to a [tag and release](https://github.com/kzzzr/mybi-dbt-core/tags).
 
 {% highlight bash %}
 
@@ -24,6 +24,6 @@ Importing this module becomes as simple as this:
 packages:
  - git: "https://github.com/kzzzr/mybi-dbt-core.git"
    revision: 0.2.0
-
+   
 {% endraw %}
 {% endhighlight %}
