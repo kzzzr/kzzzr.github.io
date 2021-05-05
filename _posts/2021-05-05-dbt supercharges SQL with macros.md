@@ -66,7 +66,6 @@ with source as (
 select
 
 HASHBYTES(
-
     'SHA2_256',
     concat(
         coalesce(cast(account_id as NVARCHAR), ''),
