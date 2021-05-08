@@ -44,11 +44,9 @@ Since it is intended to be informational only, I configure it with severity leve
 
 {% highlight yaml linenos %}
 {% raw %}
-
   - name: stg_ym_sessions_facts
      tests:
        - not_empty:
-           severity: warn
-           
+           severity: warn           
 {% endraw %}
 {% endhighlight %}
