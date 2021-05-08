@@ -9,32 +9,34 @@ But still if you need something special you can easily add it yourself. For me t
 
 {% highlight sql linenos %}
 {% raw %}
-\-- NON_EMPTY
-{% macro test_not_empty(model, column_name) %}
 
-    with validation as (
-     
-       select
-           count(1) as row_count
-     
-       from {{ model }}
-     
-    ),
-     
-    validation_errors as (
-     
-       select
-           row_count
-     
-       from validation
-       where row_count = 0
-     
-    )
-     
-    select count(*)
-    from validation_errors
-     
-    {% endmacro %}
+-- NON_EMPTY
+{% macro test_not_empty(model, column_name) %}
+ 
+with validation as (
+ 
+   select
+       count(1) as row_count
+ 
+   from {{ model }}
+ 
+),
+ 
+validation_errors as (
+ 
+   select
+       row_count
+ 
+   from validation
+   where row_count = 0
+ 
+)
+ 
+select count(*)
+from validation_errors
+ 
+{% endmacro %}
+
 
 {% endraw %}
 {% endhighlight %}
@@ -43,9 +45,9 @@ Since it is intended to be informational only, I configure it with severity leve
 
 {% highlight yaml linenos %}
 {% raw %}
-\- name: stg_ym_sessions_facts
-tests:
-\- not_empty:
-severity: warn
+  - name: stg_ym_sessions_facts
+     tests:
+       - not_empty:
+           severity: warn
 {% endraw %}
 {% endhighlight %}
