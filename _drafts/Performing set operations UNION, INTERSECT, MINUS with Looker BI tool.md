@@ -33,7 +33,6 @@ Looker is a very powerful instrument. Let us try to accomplish this task by perf
 
 First describe primary query to get the base segment:
 
-  
 [![](https://habrastorage.org/webt/hn/1k/_b/hn1k_bkhuprtsqgjjujb0zxjp-y.png)](https://habrastorage.org/webt/hn/1k/_b/hn1k_bkhuprtsqgjjujb0zxjp-y.png)
 
 Then find passengers who we want to exclude from the first set. This would be just a different service group:
@@ -42,7 +41,6 @@ Then find passengers who we want to exclude from the first set. This would be ju
 
 Now define merge rules – namely a condition on which we join two sets:
 
-  
 [![](https://habrastorage.org/webt/ve/o6/zt/veo6zt0ef1ku-hv4q39ttvpqtue.png)](https://habrastorage.org/webt/ve/o6/zt/veo6zt0ef1ku-hv4q39ttvpqtue.png)
 
 Now the magic happens with Table Calculations:
@@ -50,10 +48,10 @@ Now the magic happens with Table Calculations:
 {% highlight sql %}
 {% raw %}
 
--- Any Journey in Business Service Group: 
+\-- Any Journey in Business Service Group:
 NOT is_null(${q1_f_passengers_journeys.service_group})
 
--- # Passengers: 
+\-- # Passengers:
 sum(if(${any_journey_in_business_service_group}, 1, 0))
 
 {% endhighlight %}
