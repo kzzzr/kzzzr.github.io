@@ -16,4 +16,5 @@ pages:
 - _posts/2021-05-05-Performing custom ‘not empty’ tests.md
 - _posts/2021-05-05-Releasing CORE DWH version.md
 - _posts/2021-05-05-dbt supercharges SQL with macros.md
-- _posts/Performing set operations UNION, INTERSECT, MINUS with Looker BI tool.md
+- _posts/2021-05-10-Performing set operations UNION, INTERSECT, MINUS with Looker
+  BI tool.md
