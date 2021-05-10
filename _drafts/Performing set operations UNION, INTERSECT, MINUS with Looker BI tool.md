@@ -48,14 +48,14 @@ Now the magic happens with Table Calculations:
 {% highlight sql %}
 {% raw %}
 
-\-- Any Journey in Business Service Group:
+-- Any Journey in Business Service Group:
 NOT is_null(${q1_f_passengers_journeys.service_group})
 
-\-- # Passengers:
+-- # Passengers:
 sum(if(${any_journey_in_business_service_group}, 1, 0))
 
-{% endhighlight %}
 {% endraw %}
+{% endhighlight %}
 
 [![](https://habrastorage.org/webt/6q/de/5e/6qde5eetmovvdmerwths8-53gpk.png)](https://habrastorage.org/webt/6q/de/5e/6qde5eetmovvdmerwths8-53gpk.png)
 
